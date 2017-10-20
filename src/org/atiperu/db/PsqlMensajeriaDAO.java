@@ -78,7 +78,6 @@ public class PsqlMensajeriaDAO extends PadreConexion implements IMensajeria {
 		} finally {
 			super.retornarConexion(con);
 		}
-		
 		return detalle;
 	}
 
