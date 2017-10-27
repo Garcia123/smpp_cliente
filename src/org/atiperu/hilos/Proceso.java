@@ -209,6 +209,7 @@ public class Proceso extends Thread {
 
 	public void detener() {
 		this.stopped = true;
+		smpp.close();
 		db.close();
 	}
 

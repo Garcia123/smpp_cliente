@@ -21,7 +21,7 @@ public class PadreSesion {
 			SmppConf conf = ObtenerConfiguracion();
 			PoolSession p = new PoolSession(conf);
 			pool = new GenericObjectPool<SmppClient>(p);
-			pool.setConfig(cantidadPool(10));
+			pool.setConfig(cantidadPool(conf.getConnPool()));
 		}
 		return pool;
 	}
@@ -38,6 +38,7 @@ public class PadreSesion {
 		conf.setPassword(p.getProperty("password"));
 		conf.setPort(Integer.parseInt(p.getProperty("port")));
 		conf.setSystemId(p.getProperty("systemId"));
+		conf.setConnPool(Integer.parseInt(p.getProperty("connPool")));
 		conf.setSystemType("");
 		return conf;
 	}

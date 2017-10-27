@@ -1,12 +1,15 @@
 package org.atiperu.db;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.atiperu.bean.DetalleCampania;
 import org.atiperu.bean.HistorialEnviosSms;
 import org.atiperu.hilos.InsertarHistorialSms;
 import org.atiperu.utils.Fechas;
@@ -61,6 +64,43 @@ public class PsqlReportesDAO extends PadreConexion implements IReportes {
 		} finally {
 			super.retornarConexion(con);
 		}
+		return lista;
+	}
+
+	@Override
+	public List<DetalleCampania> obtenerListaHistorica2(int id_campania, boolean estado, int numeroReintento) throws Exception {
+		// TODO Auto-generated method stub
+		Connection con = super.pedirConexion();
+		List<DetalleCampania> lista = new ArrayList<>();
+		ResultSetHandler<List<DetalleCampania>> h = new ResultSetHandler<List<DetalleCampania>>() {
+
+			@Override
+			public List<DetalleCampania> handle(ResultSet rs) throws SQLException {
+				// TODO Auto-generated method stub
+				List<DetalleCampania> lista = new ArrayList<>();
+
+				while (rs.next()) {
+					// DetalleCampania
+					DetalleCampania d = new DetalleCampania();
+					d.setId_campania(rs.getInt(1));
+					d.setNumero(rs.getString(2));
+					d.setMensaje(rs.getString(3));
+					lista.add(d);
+				}
+				return lista;
+			}
+		};
+
+		Object[] paran = { id_campania, estado, numeroReintento };
+		String sql = "SELECT id_campania, numero, mensaje FROM reportes.historial_envios_sms WHERE id_campania = ? AND estado = ? AND reintento = ?";
+		try {
+			lista = run.query(con, sql, h, paran);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			super.retornarConexion(con);
+		}
+
 		return lista;
 	}
 

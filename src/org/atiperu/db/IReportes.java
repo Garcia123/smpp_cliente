@@ -2,6 +2,7 @@ package org.atiperu.db;
 
 import java.util.List;
 
+import org.atiperu.bean.DetalleCampania;
 import org.atiperu.bean.HistorialEnviosSms;
 
 public interface IReportes {
@@ -11,5 +12,7 @@ public interface IReportes {
 	void asyncInsertarHistorialEnviosSms(HistorialEnviosSms obj) throws Exception;
 
 	List<HistorialEnviosSms> obtenerListaHistorica(int id_campania, boolean estado) throws Exception;
+
+	List<DetalleCampania> obtenerListaHistorica2(int id_campania, boolean estado, int numeroReintento)throws Exception;
 
 }

@@ -9,7 +9,7 @@ public class SmppConf {
 	private String systemType;
 	private int addTon;
 	private int addNpi;
-	
+	private int connPool;
 	
 	public String getIpAdress() {
 		return ipAdress;
@@ -52,6 +52,13 @@ public class SmppConf {
 	}
 	public void setAddNpi(int addNpi) {
 		this.addNpi = addNpi;
+	}
+	
+	public int getConnPool() {
+		return connPool;
+	}
+	public void setConnPool(int connPool) {
+		this.connPool = connPool;
 	}
 	@Override
 	public String toString() {

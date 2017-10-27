@@ -49,4 +49,9 @@ public class Serviciodb {
 		return reporte.obtenerListaHistorica(id_campania,estado);
 	}
 
+	public List<DetalleCampania> obtenerListaHistorica2(int id_campania, boolean estado,int numeroReintento)throws Exception {
+		// TODO Auto-generated method stub
+		return reporte.obtenerListaHistorica2(id_campania,estado,numeroReintento);
+	}
+
 }

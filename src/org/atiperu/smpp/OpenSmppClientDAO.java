@@ -35,9 +35,10 @@ public class OpenSmppClientDAO extends PadreSesion implements IsmppClient {
 	public HistorialEnviosSms submit(ParanSubmit sms) throws Exception {
 		// TODO Auto-generated method stub
 		HistorialEnviosSms hes = null;
-		SmppClient smppClient = super.pedirSesion();
+		SmppClient smppClient = null;
 
 		try {
+			smppClient = super.pedirSesion();
 			SubmitSMResp resp = smppClient.submit(sms);
 			hes = new HistorialEnviosSms();
 			hes.setMensaje(sms.getShortMessage());

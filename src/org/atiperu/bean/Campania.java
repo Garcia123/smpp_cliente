@@ -3,6 +3,7 @@ package org.atiperu.bean;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Queue;
 
 public class Campania {
 
@@ -19,6 +20,7 @@ public class Campania {
 	private int id_categoria;
 	private int id_tipo_sms;
 	private List<DetalleCampania> listaNumeros;
+	private Queue<DetalleCampania> cola;
 
 	private int reintentosEjecutados = 0;
 
@@ -139,6 +141,18 @@ public class Campania {
 
 	public void reintentoMasUno() {
 		reintentosEjecutados++;
+	}
+	
+	public Queue<DetalleCampania> getCola() {
+		return cola;
+	}
+	
+	public synchronized DetalleCampania poll() {
+		return cola.poll();
+	}
+
+	public void setCola(Queue<DetalleCampania> cola) {
+		this.cola = cola;
 	}
 
 	@Override
